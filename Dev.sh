@@ -10,7 +10,7 @@ set -e
 LOCK_UPDATE=true
 USER_NAME=dev
 HOME_DIR=/home/$USER_NAME
-HOMEBREW_PREFIX=$HOME_DIR/.linuxbrew
+HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
 
 
 # URLs dos instaladores
