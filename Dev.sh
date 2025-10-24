@@ -116,9 +116,15 @@ cargo install taplo-cli --locked --features lsp
 # HOMEBREW
 # ======================================================
 /bin/bash -c "$(curl --retry 5 --retry-delay 3 -fsSL $BREW_INSTALL_URL)"
-echo >> /home/dev/.bashrc
-    echo 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"' >> /home/dev/.bashrc
-    eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
+
+export USER=dev
+export HOME=/home/dev
+export HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+
+echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "$HOME/.bashrc"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
 brew install "${BREW_PACKAGES[@]}"
 brew cleanup -s
 rm -rf "$(brew --cache)"
