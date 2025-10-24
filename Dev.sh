@@ -7,6 +7,7 @@ set -e
 # ======================================================
 
 # Usuário e diretórios
+LOCK_UPDATE=true
 USER_NAME=dev
 HOME_DIR=/home/$USER_NAME
 HOMEBREW_PREFIX=$HOME_DIR/.linuxbrew
@@ -32,8 +33,8 @@ NPM_PACKAGES=(
 
 # Pacotes uv
 UV_PACKAGES=(
-  basedpyright==1.18.2
-  ruff==0.7.2
+  basedpyright
+  ruff
 )
 
 # Brew packages
@@ -121,4 +122,46 @@ rm -rf "$(brew --cache)"
 # ======================================================
 mkdir -p "$HOME/.config/helix/"
 curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-lsp.toml" -o "$HOME/.config/helix/languages.toml"
+
+update_system() {
+  echo "🧩 Atualizando sistema..."
+  sudo apt-get update && sudo apt-get upgrade -y
+}
+
+update_npm() {
+  echo "📦 Atualizando npm..."
+  npm install -g @npm/latest
+  npm install
+}
+
+update_uv() {
+  echo "⚙️ Atualizando uv..."
+  uv self update || echo "uv não encontrado, pulando..."
+}
+
+update_rust() {
+  echo "🦀 Atualizando Rust..."
+  rustup update
+}
+
+update_brew() {
+  echo "🍺 Atualizando Homebrew..."
+  brew tap domt4/autoupdate
+  brew autoupdate start
+}
+
+# ======================================================
+# EXECUÇÃO CONDICIONAL DO BLOCO DE ATUALIZAÇÃO
+# ======================================================
+
+if [ "$LOCK_UPDATE" = false ]; then
+  update_system
+  update_npm
+  update_uv
+  update_rust
+  update_brew
+else
+  echo "🔒 Atualizações travadas (LOCK_UPDATE=true). Pulando updates."
+fi
+
 
