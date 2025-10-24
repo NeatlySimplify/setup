@@ -15,3 +15,15 @@ basedpyright.analysis.diagnosticMode = "openFilesOnly"
 command = "ruff-lsp"
 [language-server.ruff.config.settings]
 args = ["--ignore", "E501"]
+
+[[language]]
+name = "toml"
+# https://github.com/tamasfe/taplo/issues/580#issuecomment-2004174721
+roots = ["."]
+language-servers = ["taplo"]
+
+[[language]]
+name = "rust"
+language-servers = ["rust-analyze"]
+[language-server.rust-analyzer.config.check]
+command = "clippy"
