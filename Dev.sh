@@ -11,7 +11,7 @@ LOCK_UPDATE=true
 USER_NAME=dev
 HOME_DIR=/home/$USER_NAME
 HOMEBREW_PREFIX=$HOME_DIR/.linuxbrew
-NPM_GLOBAL_DIR=$HOME_DIR/.npm-global
+
 
 # URLs dos instaladores
 UV_INSTALL_URL="https://astral.sh/uv/install.sh"
@@ -48,9 +48,9 @@ BREW_PACKAGES=(
 # ======================================================
 export HOME=$HOME_DIR
 export USER=$USER_NAME
-export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$NPM_GLOBAL_DIR/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
 
-mkdir -p "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.config/helix" "$NPM_GLOBAL_DIR"
+mkdir -p "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.config/helix"
 
 
 # ======================================================
