@@ -86,18 +86,23 @@ done
 # NODE.JS + NPM
 # ======================================================
 curl --retry 5 --retry-delay 3 -o- "$NODE_SETUP_URL" | bash
+
+# Carrega o NVM no shell atual
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
+# Instala e define a versão LTS como padrão
 nvm install --lts
 nvm use --lts
-NODE_VERSION=$(node -v)          # v18.19.1
+NODE_VERSION=$(node -v)  # Exemplo: v18.19.1
 nvm alias default "$NODE_VERSION"
 
-npm config set prefix "$NPM_GLOBAL_DIR"
-export PATH="$NPM_GLOBAL_DIR/bin:$PATH"
+# Garante que o npm use o prefixo do nvm (caso tenha sobras de .npmrc antigo)
+rm -f "$HOME/.npmrc"
 
+# Atualiza o npm e instala os pacotes globais
+npm install -g npm@latest
 npm install -g "${NPM_PACKAGES[@]}"
 
 # ======================================================
