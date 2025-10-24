@@ -115,7 +115,7 @@ cargo install taplo-cli --locked --features lsp
 # ======================================================
 # HOMEBREW
 # ======================================================
-NONINTERACTIVE=1 /bin/bash -c "$(curl --retry 5 --retry-delay 3 -fsSL $BREW_INSTALL_URL)"
+/bin/bash -c "$(curl --retry 5 --retry-delay 3 -fsSL $BREW_INSTALL_URL)"
 echo >> /home/dev/.bashrc
     echo 'eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"' >> /home/dev/.bashrc
     eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
