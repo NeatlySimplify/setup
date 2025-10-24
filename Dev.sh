@@ -135,6 +135,7 @@ rm -rf "$(brew --cache)"
 # ======================================================
 mkdir -p "$HOME/.config/helix/"
 curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-lsp.toml" -o "$HOME/.config/helix/languages.toml"
+curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-ignore.ignore" -o "$HOME/.config/helix/.ignore"
 
 update_system() {
   echo "🧩 Atualizando sistema..."
@@ -177,4 +178,5 @@ else
   echo "🔒 Atualizações travadas (LOCK_UPDATE=true). Pulando updates."
 fi
 
+source ~/.bashrc
 
