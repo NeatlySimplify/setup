@@ -75,7 +75,7 @@ sudo apt-get install -y helix
 # ======================================================
 # UV PACKAGE MANAGER
 # ======================================================
-curl -LsSf $UV_INSTALL_URL | sh
+curl --retry 5 --retry-delay 3 -LsSf $UV_INSTALL_URL | sh
 
 for pkg in "${UV_PACKAGES[@]}"; do
   uv tool install "$pkg"
@@ -84,7 +84,7 @@ done
 # ======================================================
 # NODE.JS + NPM
 # ======================================================
-curl -o- "$NODE_SETUP_URL" | bash
+curl --retry 5 --retry-delay 3 -o- "$NODE_SETUP_URL" | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -102,14 +102,14 @@ npm install -g "${NPM_PACKAGES[@]}"
 # ======================================================
 # RUST
 # ======================================================
-curl --proto '=https' --tlsv1.2 -sSf $RUST_INSTALL_URL | sh -s -- -y
+curl --retry 5 --retry-delay 3 --proto '=https' --tlsv1.2 -sSf $RUST_INSTALL_URL | sh -s -- -y
 rustup component add clippy rust-src rustfmt rust-analyzer
 cargo install taplo-cli --locked --features lsp
 
 # ======================================================
 # HOMEBREW
 # ======================================================
-/bin/bash -c "$(curl -fsSL $BREW_INSTALL_URL)"
+/bin/bash -c "$(curl --retry 5 --retry-delay 3 -fsSL $BREW_INSTALL_URL)"
 eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 brew install "${BREW_PACKAGES[@]}"
 brew cleanup -s
@@ -120,5 +120,5 @@ rm -rf "$(brew --cache)"
 # HELIX LANGUAGE CONFIG
 # ======================================================
 mkdir -p "$HOME/.config/helix/"
-curl -fsSL "$REPO/helix-lsp.toml" -o "$HOME/.config/helix/languages.toml"
+curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-lsp.toml" -o "$HOME/.config/helix/languages.toml"
 
