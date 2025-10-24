@@ -17,6 +17,7 @@ UV_INSTALL_URL="https://astral.sh/uv/install.sh"
 NODE_SETUP_URL="https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh"
 RUST_INSTALL_URL="https://sh.rustup.rs"
 BREW_INSTALL_URL="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+REPO="https://raw.githubusercontent.com/NeatlySimplify/setup/main"
 
 # Pacotes npm globais
 NPM_PACKAGES=(
@@ -48,9 +49,8 @@ export HOME=$HOME_DIR
 export USER=$USER_NAME
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$NPM_GLOBAL_DIR/bin:$PATH"
 
-mkdir -p $HOME_DIR
-mkdir -p $HOMEBREW_PREFIX
-mkdir -p $NPM_GLOBAL_DIR
+mkdir -p "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.config/helix" "$NPM_GLOBAL_DIR"
+
 
 # ======================================================
 # ATUALIZAR APT E INSTALAR DEPENDÊNCIAS BASE
@@ -84,13 +84,13 @@ done
 # ======================================================
 # NODE.JS + NPM
 # ======================================================
-curl -o- $NODE_SETUP_URL | PROFILE="/dev/null" bash
 export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
 nvm install --lts
 nvm use --lts
-NODE_VERSION=$(node -v)          # Ex.: v18.19.1
+NODE_VERSION=$(node -v)          # v18.19.1
 nvm alias default "$NODE_VERSION"
 
 npm config set prefix "$NPM_GLOBAL_DIR"
@@ -109,6 +109,7 @@ cargo install taplo-cli --locked --features lsp
 # HOMEBREW
 # ======================================================
 /bin/bash -c "$(curl -fsSL $BREW_INSTALL_URL)"
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 brew install "${BREW_PACKAGES[@]}"
 brew cleanup -s
 rm -rf "$(brew --cache)"
