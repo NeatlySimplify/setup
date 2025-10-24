@@ -14,11 +14,9 @@ NPM_GLOBAL_DIR=$HOME_DIR/.npm-global
 
 # URLs dos instaladores
 UV_INSTALL_URL="https://astral.sh/uv/install.sh"
-NODE_SETUP_URL="https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh"
+NODE_SETUP_URL="https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh"
 RUST_INSTALL_URL="https://sh.rustup.rs"
 BREW_INSTALL_URL="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
-HELIX_KEY_URL="https://packages.helix-editor.com/apt/key.asc"
-HELIX_REPO_URL="https://packages.helix-editor.com/apt/"
 
 # Pacotes npm globais
 NPM_PACKAGES=(
@@ -59,11 +57,20 @@ mkdir -p $NPM_GLOBAL_DIR
 # ======================================================
 sudo apt-get update
 sudo apt-get install -y \
-  curl git sudo wget nano vim build-essential pkg-config gcc g++ \
+  curl git sudo wget nano vim build-essential pkg-config gcc g++ software-properties-common \
   libssl-dev zlib1g-dev libncurses5-dev libreadline-dev libsqlite3-dev \
   libffi-dev liblzma-dev \
   python3 python3-venv python3-pip python3-wheel \
   lua5.4
+
+
+# ======================================================
+# HELIX
+# ======================================================
+sudo add-apt-repository ppa:maveonair/helix-editor
+sudo apt-get update
+sudo apt-get install -y helix
+
 
 # ======================================================
 # UV PACKAGE MANAGER
@@ -106,10 +113,10 @@ brew install "${BREW_PACKAGES[@]}"
 brew cleanup -s
 rm -rf "$(brew --cache)"
 
+
 # ======================================================
-# HELIX
+# HELIX LANGUAGE CONFIG
 # ======================================================
-curl -fsSL $HELIX_KEY_URL | sudo tee /etc/apt/trusted.gpg.d/helix.asc > /dev/null
-echo "deb [arch=$(dpkg --print-architecture)] $HELIX_REPO_URL stable main" | sudo tee /etc/apt/sources.list.d/helix.list
-sudo apt-get update
-sudo apt-get install -y helix
+mkdir -p "$HOME/.config/helix/"
+curl -fsSL "$REPO/helix-lsp.toml" -o "$HOME/.config/helix/languages.toml"
+
