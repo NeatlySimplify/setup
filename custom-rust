@@ -1,7 +1,6 @@
-# ===== Stage 2: Rust Dev =====
+# ===== Rust Dev =====
 FROM rust:1.82-slim
 
-COPY --from=helix-builder /out /opt/helix
 ENV PATH="/opt/helix:${PATH}"
 ENV REPO="https://raw.githubusercontent.com/NeatlySimplify/setup/main"
 
