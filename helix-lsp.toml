@@ -6,15 +6,15 @@ language-servers = [ "basedpyright", "ruff" ]
 [language-server.basedpyright]
 command = "basedpyright-langserver"
 args = ["--stdio"]
-
 [language-server.basedpyright.config]
 basedpyright.analysis.diagnosticMode = "openFilesOnly"
-
-# Use the ruff-lsp configuration
 [language-server.ruff] 
-command = "ruff-lsp"
+command = "ruff"
+args=["server"]
 [language-server.ruff.config.settings]
 args = ["--ignore", "E501"]
+[language-server.ruff.config.settings.format]
+skip-magic-trailing-comma = false
 
 [[language]]
 name = "toml"
