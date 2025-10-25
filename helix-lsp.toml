@@ -24,6 +24,8 @@ language-servers = ["taplo"]
 
 [[language]]
 name = "rust"
-language-servers = ["rust-analyze"]
+language-servers = ["rust-analyzer"]
 [language-server.rust-analyzer.config.check]
 command = "clippy"
+[language-server.rust-analyzer.config.cargo]
+features = "all"
