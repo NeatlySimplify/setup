@@ -34,7 +34,7 @@ RUN mkdir -p "$HOME/.config/helix/"
 
 RUN curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-lsp.toml" -o "$HOME/.config/helix/languages.toml"
 
-RUN curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-ignore.ignore" -o "$HOME/.config/helix/.ignore"
+RUN curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-ignore" -o "$HOME/.config/helix/.ignore"
 
 WORKDIR /home
 
