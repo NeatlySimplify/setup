@@ -1,7 +1,7 @@
 # ===== Python Dev =====
 FROM python:slim-bookworm
 
-ENV PATH="/opt/helix:${PATH}"
+ENV PATH="/root/.local/bin:${PATH}"
 ENV REPO="https://raw.githubusercontent.com/NeatlySimplify/setup/main"
 ENV UV_INSTALL_URL="https://astral.sh/uv/install.sh"
 
@@ -21,14 +21,14 @@ RUN APPIMAGE_URL=$(curl -s https://api.github.com/repos/helix-editor/helix/relea
     rm helix.AppImage
 
 
-RUN curl --retry 5 --retry-delay 3 -LsSf $UV_INSTALL_URL | sh
+RUN curl --retry 5 --retry-delay 3 -LsSf $UV_INSTALL_URL | env UV_INSTALL_DIR="/usr/local/bin" sh
 
 RUN uv tool install basedpyright; uv tool install ruff
 
 RUN mkdir -p "$HOME/.config/helix/"
 
 RUN curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-lsp.toml" -o "$HOME/.config/helix/languages.toml"
-RUN curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-ignore.ignore" -o "$HOME/.config/helix/.ignore"
+RUN curl --retry 5 --retry-delay 3 -fsSL "$REPO/helix-ignore" -o "$HOME/.config/helix/.ignore"
 
 WORKDIR /home
 ENTRYPOINT ["hx"]
