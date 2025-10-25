@@ -1,7 +1,6 @@
-# ===== Stage 2: Python Dev =====
+# ===== Python Dev =====
 FROM python:slim-bookworm
 
-COPY --from=helix-builder /out /opt/helix
 ENV PATH="/opt/helix:${PATH}"
 ENV REPO="https://raw.githubusercontent.com/NeatlySimplify/setup/main"
 ENV UV_INSTALL_URL="https://astral.sh/uv/install.sh"
