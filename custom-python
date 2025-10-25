@@ -1,5 +1,5 @@
 # ===== Python Dev =====
-FROM python:slim-bookworm
+FROM python:slim
 
 ENV HELIX="https://api.github.com/repos/helix-editor/helix/releases/latest"
 ENV REPO="https://raw.githubusercontent.com/NeatlySimplify/setup/main"
