@@ -1,7 +1,6 @@
-# ===== Stage 2: Node Dev =====
+# ===== Node Dev =====
 FROM node:slim
 
-COPY --from=helix-builder /out /opt/helix
 ENV PATH="/opt/helix:${PATH}"
 ENV REPO="https://raw.githubusercontent.com/NeatlySimplify/setup/main"
 
