@@ -9,6 +9,7 @@ __pycache__/
 .Python
 build/
 dist/
+assets/
 *.egg-info/
 .eggs/
 lib/
@@ -36,6 +37,7 @@ node_modules/
 jspm_packages/
 dist/
 dist-ssr/
+public/
 build/
 .tmp/
 .cache/
