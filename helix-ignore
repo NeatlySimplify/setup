@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-**/*cache*/
 *.pyc
 
 # C extensions
@@ -77,14 +76,12 @@ target/
 .python-version
 
 # Environments
-.env
+
 .venv
-env/
 venv/
 ENV/
 env.bak/
 venv.bak/
-.env.local
 .env.*.local
 .env.development.local
 .env.test.local
@@ -154,9 +151,57 @@ coverage
 
 
 # Local files / Folders
-**/migrations/
-**/.poetry/
-**/.venv/
-**/.zed/
-**/__pycache__/
-**/node_modules/
+migrations/
+.poetry/
+.venv/
+.zed/
+
+# RUST
+target/
+debug/
+release/
+Cargo.lock
+*.rlib
+*.dSYM
+*.pdb
+*.exe
+*.dll
+*.dylib
+*.so
+*.a
+.cargo/
+.cargo-lock/
+rust-toolchain.toml.bk
+rust-analyzer.d/
+
+# JS
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+vite-dist/
+vite.config.ts.timestamp*
+
+# LUA
+*.rock
+*.src.rock
+*.zip
+*.tar.gz
+
+# Lua build/output folders
+luarocks/
+deps/
+build/
+obj/
+bin/
+# Common temporary files
+*.out
+*.bak
+*.tmp
+*.swp
+
+# Lua Language Server cache
+.luarc.json
+.luacheckcache
+.lua_ls_cache/
+.lua-language-server/
