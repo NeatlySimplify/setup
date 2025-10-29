@@ -1,5 +1,30 @@
 theme = "everforest_light"
 
 [editor]
-line-number = "relative"
-mouse = false
+line-number = "absolute"
+mouse = true
+shell = ["sh", "-c"]
+end-of-line-diagnostics = "hint"
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+other-lines = "warning"
+
+[editor.file-picker]
+ignore = true
+git-ignore = false
+
+[editor.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+"'" = "'"
+'"""' = '"""'
+
+[editor.auto-save]
+after-delay.timeout = 50000
+
+[editor.soft-wrap]
+enable = true
