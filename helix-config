@@ -21,7 +21,6 @@ git-ignore = false
 '"' = '"'
 '`' = '`'
 "'" = "'"
-'"""' = '"""'
 
 [editor.auto-save]
 after-delay.timeout = 50000
